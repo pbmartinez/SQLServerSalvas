@@ -1,0 +1,73 @@
+﻿@page "/conexiones"
+
+@using Core.Domain.Entities
+
+@inject HttpClient httpClient
+@inject ISnackbar Snackbar
+
+
+    <MudTable Items="@Conexiones" Dense="@dense" Hover="@hover" ReadOnly="@ronly" 
+              Filter="new Func<Conexion, bool>(FilterFunc)"
+              @bind-SelectedItem="selectedItem" SortLabel="Sort By" CommitEditTooltip="Commit Edit"
+              OnCommitEditClick="@(() => Snackbar.Add("Commit Edit Handler Invoked"))">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Conexiones</MudText>
+            <MudToolBarSpacer />
+            <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<Conexion, object>(x => x.Nombre)">Nombre</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Conexion, object>(x => x.Servidor)">Servidor</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Conexion, object>(x => x.BaseDatos)">Base de Datos</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Conexion, object>(x => x.Puerto)">Puerto</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Conexion, object>(x => x.Path)">Path</MudTableSortLabel></MudTh>
+        </HeaderContent>        
+        <RowEditingTemplate>
+            <MudTd DataLabel="Nombre">
+                <MudTextField @bind-Value="@context.Nombre" Required />
+            </MudTd>
+            <MudTd DataLabel="Servidor">
+                <MudTextField @bind-Value="@context.Servidor" Required />
+            </MudTd>
+            <MudTd DataLabel="Base de Datos">
+                <MudTextField @bind-Value="@context.BaseDatos" Required />
+            </MudTd>
+            <MudTd DataLabel="Puerto">
+                <MudNumericField @bind-Value="@context.Puerto" Required Min="1" />
+            </MudTd>
+            <MudTd DataLabel="Path">
+                <MudTextField @bind-Value="@context.Path" Required />
+            </MudTd>
+        </RowEditingTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+    <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+    <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+    <MudSwitch @bind-Checked="@ronly" Color="Color.Tertiary">Read Only</MudSwitch>
+    <MudText Inline="true">Selected</MudText>
+@code {
+    private bool dense = false;
+    private bool hover = true;
+    private bool ronly = false;
+    private string searchString = "";
+    private Conexion selectedItem = new Conexion { Id=Guid.NewGuid(),Nombre="asd",BaseDatos="asd", Path="asd", Puerto=54,Servidor="asd"};
+    private HashSet<Conexion> selectedItems = new HashSet<Conexion>();
+
+    private IEnumerable<Conexion> Conexiones = new List<Conexion>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Conexiones = await httpClient.GetFromJsonAsync<List<Conexion>>("/conexiones");
+        StateHasChanged();
+    }
+
+    private bool FilterFunc(Conexion conexion)
+    {
+        if ($"{conexion.Nombre} {conexion.Servidor} {conexion.Puerto} {conexion.BaseDatos} {conexion.Path}"
+            .Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+}

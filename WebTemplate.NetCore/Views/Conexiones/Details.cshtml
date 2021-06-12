@@ -1,0 +1,55 @@
+﻿@model Core.Domain.Entities.Conexion
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Conexion</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Servidor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Servidor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Puerto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Puerto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BaseDatos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BaseDatos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Path)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Path)
+        </dd>
+    </dl>
+</div>
+<div class="col-4">
+    <a asp-action="Index" class="btn" data-toggle="tooltip" data-placement="top" title="Volver al listado">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+
+    <button type="submit" class="btn float-right" data-toggle="tooltip" data-placement="top" title="Editar">
+        <i class="fa fa-pen"></i>
+    </button>
+    
+</div>

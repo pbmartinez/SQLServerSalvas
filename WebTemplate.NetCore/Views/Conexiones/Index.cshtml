@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Core.Domain.Entities.Conexion>
+@using Newtonsoft.Json;
+@{
+    ViewData["Title"] = "Listado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h1>Listado</h1>
+
+<p>
+    <a asp-action="Create" class="btn float-right" data-toggle="tooltip" data-placement="top" title="Crear"><i class="fa fa-plus-square fa-2x"></i></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Servidor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Puerto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BaseDatos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Path)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servidor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Puerto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaseDatos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Path)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <i class="fa fa-pen"></i>
+                    </a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn" data-toggle="tooltip" data-placement="top" title="Detalles">
+                    <i class="fa fa-info"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                    <i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

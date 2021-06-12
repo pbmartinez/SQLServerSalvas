@@ -1,0 +1,58 @@
+﻿@model Core.Domain.Entities.Conexion
+
+@{
+    ViewData["Title"] = "Edita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Editar</h1>
+
+<h4>Conexion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Servidor" class="control-label"></label>
+                <input asp-for="Servidor" class="form-control" />
+                <span asp-validation-for="Servidor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Puerto" class="control-label"></label>
+                <input asp-for="Puerto" class="form-control" />
+                <span asp-validation-for="Puerto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseDatos" class="control-label"></label>
+                <input asp-for="BaseDatos" class="form-control" />
+                <span asp-validation-for="BaseDatos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Path" class="control-label"></label>
+                <input asp-for="Path" class="form-control" />
+                <span asp-validation-for="Path" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <a asp-action="Index" class="btn" data-toggle="tooltip" data-placement="top" title="Volver al listado">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+
+                <button type="submit" class="btn float-right" data-toggle="tooltip" data-placement="top" title="Guardar">
+                    <i class="fa fa-save"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

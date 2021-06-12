@@ -1,0 +1,25 @@
+﻿@model Message
+
+@using WebTemplate.NetCore.Enums
+
+
+@{
+    Layout = null;
+
+    var severityClass = Model != null && Model.MessageSeverity != EnumMessageSeverity.notSet
+        ? $"alert alert-{Model.MessageSeverity.ToString()} alert-dismissible fade show"
+        : "";
+}
+@if (Model == null || string.IsNullOrEmpty(Model.Content))
+{
+
+}
+else
+{
+    <div class="@severityClass" role="alert">
+        @Model.Content
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
