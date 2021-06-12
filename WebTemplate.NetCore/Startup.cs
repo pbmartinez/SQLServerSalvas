@@ -29,11 +29,14 @@ namespace WebTemplate.NetCore
         {
             services.AddControllersWithViews();
 
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")
+            //        , b => b.MigrationsAssembly("WebTemplate.NetCore")
+            //        ));
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")
-                    , b => b.MigrationsAssembly("WebTemplate.NetCore")
-                    ));
+                options.UseSqlite("Filename=Data.db",
+                b => b.MigrationsAssembly("WebTemplate.NetCore")));
 
             services.AddScoped<IBackUpService, BackUpService>();
         }
