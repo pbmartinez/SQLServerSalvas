@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "Core.Domain\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebTemplate.NetCore", "WebTemplate.NetCore\WebTemplate.NetCore.csproj", "{F1AE215D-E088-4A73-9E9B-2D69098F7F48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Language", "Core.Language\Core.Language.csproj", "{A7C74D96-AD9E-4D23-A1F6-D7FA9E620218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Language", "Core.Language\Core.Language.csproj", "{A7C74D96-AD9E-4D23-A1F6-D7FA9E620218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
